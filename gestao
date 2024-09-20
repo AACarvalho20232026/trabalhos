@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+struct Produtos{
+    string produto;
+    float preco[5];
+    int quantidade;
+};
+
+void adicionarProduto(Produto produtos[], int& quantidadeAtual):
+    cout << "Digite novo produto" << endl;
+    
+void exibirProdutos(const Produto produtos[], int quantidadeAtual):
+
+float calcularValorTotal(const Produto produtos[], int quantidadeAtual):
+
+
+
+
+
+int main(){
+
+    cout << "1. Adicionar Produto" << endl;
+    cout << "2. Exibir Produtos" << endl;
+    cout << "3. Calcular Valor Total do Stock" << endl;
+    cout << "0. Sair" << endl;
+
+    switch (menu){
+    case 1 :
+        
+        break;
+    
+    default:
+        break;
+    }
+
+return 0;
+}
