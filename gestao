@@ -2,45 +2,53 @@
 
 using namespace std;
 
+// Definição de uma estrutura para representar um produto
 struct produto {
-    string nome;
-    float preco;
-    int quantidade;
+    string nome;  // Nome do produto
+    float preco;  // Preço do produto
+    int quantidade;  // Quantidade em estoque do produto
 };
 
+// Função para calcular o valor total dos produtos em estoque
 float calcularvalortotal(const produto produtos[], int quantidadeatual) {
-    float valortotal = 0.0;
-    for (int i = 0; i < quantidadeatual; i++) {
+    float valortotal = 0.0;  // Inicializa o valor total como 0
+    // Itera sobre todos os produtos
+    for (int i = 0; i < quantidadeatual; i++) {  // Calcula o valor de cada produto (preço * quantidade) e adiciona ao total
         valortotal += produtos[i].preco * produtos[i].quantidade;
     }
+    // Retorna o valor total do estoque
     return valortotal;
 }
 
-void exibirprodutos(const produto produtos[], int quantidadeatual) {
+// Função para exibir todos os produtos cadastrados
+void exibirprodutos(const produto produtos[], int quantidadeatual) {  // Itera sobre todos os produtos e os exibe
     for (int i = 0; i < quantidadeatual; i++) {
-        cout << "Produto " << i+1 << ":" << endl;
-        cout << "Nome: " << produtos[i].nome << endl;
-        cout << "Preço: " << produtos[i].preco << endl;
-        cout << "Quantidade: " << produtos[i].quantidade << endl;
+        cout << "Produto " << i+1 << ":" << endl;  // Exibe o número do produto
+        cout << "Nome: " << produtos[i].nome << endl;  // Exibe o nome do produto
+        cout << "Preço: " << produtos[i].preco << endl;  // Exibe o preço do produto
+        cout << "Quantidade: " << produtos[i].quantidade << endl;  // Exibe a quantidade em estoque
     }
 }
 
-void adicionarproduto(produto produtos[], int& quantidadeatual) {
+// Função para adicionar um novo produto
+void adicionarproduto(produto produtos[], int& quantidadeatual) {  // Solicita o nome, preço e quantidade do produto ao usuário e armazena no array
     cout << "Nome do produto: ";
     cin >> produtos[quantidadeatual].nome;
     cout << "Preço do produto: ";
     cin >> produtos[quantidadeatual].preco;
     cout << "Quantidade em estoque: ";
-    cin >> produtos[quantidadeatual].quantidade;
+    cin >> produtos[quantidadeatual].quantidade; // Incrementa a quantidade atual de produtos após a adição
     quantidadeatual++;
 }
 
 int main() {
-    produto maxprodutos[100];
-    int quantidadeatual = 0;
-    int escolha;
+    produto maxprodutos[100];  // Array para armazenar até 100 produtos
+    int quantidadeatual = 0;  // Inicializa a quantidade atual de produtos como 0
+    int escolha;  // Variável para armazenar a escolha do usuário no menu
 
+    // Loop principal do programa, que exibe o menu até o usuário escolher sair
     do {
+        // Exibe o menu de opções
         cout << "Escolha uma opção:" << endl;
         cout << "1. Adicionar Produto" << endl;
         cout << "2. Exibir Produtos" << endl;
@@ -48,23 +56,29 @@ int main() {
         cout << "0. Sair" << endl;
         cin >> escolha;
 
+        // Processa a escolha do usuário usando um switch-case
         switch (escolha) {
             case 1:
+                // Chama a função para adicionar um novo produto
                 adicionarproduto(maxprodutos, quantidadeatual);
                 break;
             case 2:
+                // Chama a função para exibir todos os produtos cadastrados
                 exibirprodutos(maxprodutos, quantidadeatual);
                 break;
             case 3:
+                // Chama a função para calcular e exibir o valor total do estoque
                 cout << "Valor total do stock: " << calcularvalortotal(maxprodutos, quantidadeatual) << endl;
                 break;
             case 0:
+                // Opção para sair do programa
                 cout << "A sair..." << endl;
                 break;
             default:
+                // Caso o usuário escolha uma opção inválida
                 cout << "Escolha outra opcao." << endl;
         }
-    } while (escolha != 0);
+    } while (escolha != 0);  // O loop continua até o usuário escolher sair (escolha == 0)
 
-    return 0;
+    return 0;  
 }
