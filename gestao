@@ -12,7 +12,7 @@ struct produto {
 // Função para calcular o valor total dos produtos em estoque
 float calcularvalortotal(const produto produtos[], int quantidadeatual) {
     float valortotal = 0.0;  // Inicializa o valor total como 0
-    // Itera sobre todos os produtos
+    // relativo  sobre todos os produtos
     for (int i = 0; i < quantidadeatual; i++) {  // Calcula o valor de cada produto (preço * quantidade) e adiciona ao total
         valortotal += produtos[i].preco * produtos[i].quantidade;
     }
@@ -48,7 +48,7 @@ int main() {
 
     // Loop principal do programa, que exibe o menu até o usuário escolher sair
     do {
-        // Exibe o menu de opções
+      
         cout << "Escolha uma opção:" << endl;
         cout << "1. Adicionar Produto" << endl;
         cout << "2. Exibir Produtos" << endl;
