@@ -37,8 +37,8 @@ void adicionarproduto(produto produtos[], int& quantidadeatual) {  // Solicita o
     cout << "Preço do produto: ";
     cin >> produtos[quantidadeatual].preco;
     cout << "Quantidade em estoque: ";
-    cin >> produtos[quantidadeatual].quantidade; // Incrementa a quantidade atual de produtos após a adição
-    quantidadeatual++;
+    cin >> produtos[quantidadeatual].quantidade; 
+    quantidadeatual++;               // Incrementa a quantidade atual de produtos após a adição
 }
 
 int main() {
