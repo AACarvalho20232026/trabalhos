@@ -1,1 +1,150 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+// Estrutura para representar um produto
+struct produto {
+    int id;            // Identificador único
+    char nome[50];     // Nome do produto
+    int quantidade;    // Quantidade em estoque
+    float preco;       // Preço unitário
+    char status;       // Status ('A' para ativo, 'D' para eliminado)
+};
+
+// Função para carregar os produtos de um arquivo
+void carregarprodutos(produto produtos[], int& quantidadeatual) {
+    ifstream arquivo("produtos.txt");
+    quantidadeatual = 0;
+
+    // Lê o arquivo e popula o array de produtos
+    while (arquivo >> produtos[quantidadeatual].id >> produtos[quantidadeatual].nome 
+           >> produtos[quantidadeatual].quantidade >> produtos[quantidadeatual].preco 
+           >> produtos[quantidadeatual].status) {
+        quantidadeatual++;
+    }
+    arquivo.close();
+}
+
+// Função para salvar os produtos no arquivo
+void salvarprodutos(const produto produtos[], int quantidadeatual) {
+    ofstream arquivo("produtos.txt");
+
+    for (int i = 0; i < quantidadeatual; i++) {
+        arquivo << produtos[i].id << " " 
+                << produtos[i].nome << " "
+                << produtos[i].quantidade << " "
+                << produtos[i].preco << " "
+                << produtos[i].status << endl;
+    }
+    arquivo.close();
+}
+
+// Função para exibir todos os produtos cadastrados (somente ativos)
+void exibirprodutos(const produto produtos[], int quantidadeatual) {
+    for (int i = 0; i < quantidadeatual; i++) {
+        if (produtos[i].status == 'A') {  // Exibe apenas produtos ativos
+            cout << "ID: " << produtos[i].id << endl;
+            cout << "Nome: " << produtos[i].nome << endl;
+            cout << "Quantidade: " << produtos[i].quantidade << endl;
+            cout << "Preço: " << produtos[i].preco << endl;
+            cout << "-------------------" << endl;
+        }
+    }
+}
+
+// Função para adicionar um novo produto
+void adicionarproduto(produto produtos[], int& quantidadeatual) {
+    cout << "ID do produto: ";
+    cin >> produtos[quantidadeatual].id;
+    cout << "Nome do produto: ";
+    cin >> produtos[quantidadeatual].nome;
+    cout << "Quantidade do produto: ";
+    cin >> produtos[quantidadeatual].quantidade;
+    cout << "Preço do produto: ";
+    cin >> produtos[quantidadeatual].preco;
+    produtos[quantidadeatual].status = 'A';  // Produto ativo por padrão
+    quantidadeatual++;
+    salvarprodutos(produtos, quantidadeatual);
+}
+
+// Função para alterar um produto
+void alterarproduto(produto produtos[], int quantidadeatual) {
+    int id;
+    cout << "Informe o ID do produto que deseja alterar: ";
+    cin >> id;
+
+    for (int i = 0; i < quantidadeatual; i++) {
+        if (produtos[i].id == id && produtos[i].status == 'A') {
+            cout << "Novo nome: ";
+            cin >> produtos[i].nome;
+            cout << "Nova quantidade: ";
+            cin >> produtos[i].quantidade;
+            cout << "Novo preço: ";
+            cin >> produtos[i].preco;
+            salvarprodutos(produtos, quantidadeatual);
+            cout << "Produto alterado com sucesso!" << endl;
+            return;
+        }
+    }
+    cout << "Produto não encontrado ou está eliminado." << endl;
+}
+
+// Função para eliminar um produto
+void eliminarproduto(produto produtos[], int quantidadeatual) {
+    int id;
+    cout << "Informe o ID do produto que deseja eliminar: ";
+    cin >> id;
+
+    for (int i = 0; i < quantidadeatual; i++) {
+        if (produtos[i].id == id && produtos[i].status == 'A') {
+            produtos[i].status = 'D';  // Marca o produto como eliminado
+            salvarprodutos(produtos, quantidadeatual);
+            cout << "Produto eliminado com sucesso!" << endl;
+            return;
+        }
+    }
+    cout << "Produto não encontrado ou já eliminado." << endl;
+}
+
+int main() {
+    produto maxprodutos[100];  // Array para armazenar até 100 produtos
+    int quantidadeatual = 0;   // Inicializa a quantidade atual de produtos como 0
+    int escolha;
+
+    carregarprodutos(maxprodutos, quantidadeatual);
+
+    // Loop principal do programa
+    do {
+        cout << "Escolha uma opção:" << endl;
+        cout << "1. Adicionar Produto" << endl;
+        cout << "2. Exibir Produtos" << endl;
+        cout << "3. Alterar Produto" << endl;
+        cout << "4. Eliminar Produto" << endl;
+        cout << "0. Sair" << endl;
+        cin >> escolha;
+
+        switch (escolha) {
+            case 1:
+                adicionarproduto(maxprodutos, quantidadeatual);
+                break;
+            case 2:
+                exibirprodutos(maxprodutos, quantidadeatual);
+                break;
+            case 3:
+                alterarproduto(maxprodutos, quantidadeatual);
+                break;
+            case 4:
+                eliminarproduto(maxprodutos, quantidadeatual);
+                break;
+            case 0:
+                cout << "Saindo..." << endl;
+                break;
+            default:
+                cout << "Opção inválida!" << endl;
+        }
+    } while (escolha != 0);
+
+    return 0;
+}
 
