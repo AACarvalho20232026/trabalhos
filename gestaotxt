@@ -76,13 +76,14 @@ void alterarproduto(produto produtos[], int quantidadeatual) {
 
     for (int i = 0; i < quantidadeatual; i++) {
         if (produtos[i].id == id && produtos[i].status == 'A') {
-            cout << "Novo nome: ";
-            cin >> produtos[i].nome;
+            // Removido o trecho que altera o nome do produto
+
             cout << "Nova quantidade: ";
             cin >> produtos[i].quantidade;
             cout << "Novo preço: ";
             cin >> produtos[i].preco;
-            salvarprodutos(produtos, quantidadeatual);
+            
+            salvarprodutos(produtos, quantidadeatual);  // Salva as alterações
             cout << "Produto alterado com sucesso!" << endl;
             return;
         }
