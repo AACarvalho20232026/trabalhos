@@ -56,23 +56,23 @@ void exibirprodutos(const produto produtos[], int quantidadeatual) {
 // Função para adicionar um novo produto
 void adicionarproduto(produto produtos[], int& quantidadeatual) {
     int id;
-    bool idRepetido;
+    bool idrepetido;
 
     // Loop para garantir que o ID seja único
     do {
-        idRepetido = false;  // Inicializa como falso
+        idrepetido = false;  // Inicializa como falso
         cout << "ID do produto: ";
         cin >> id;
 
         // Verifica se o ID já existe
         for (int i = 0; i < quantidadeatual; i++) {
             if (produtos[i].id == id) {
-                idRepetido = true;
+                idrepetido = true;
                 cout << "ID já existe. Por favor, insira um ID único." << endl;
                 break;
             }
         }
-    } while (idRepetido);  // Continua pedindo ID enquanto ele não for único
+    } while (idrepetido);  // Continua pedindo ID enquanto ele não for único
 
     produtos[quantidadeatual].id = id;  // Define o ID único no novo produto
     cout << "Nome do produto: ";
