@@ -6,7 +6,7 @@ using namespace std;
 // Estrutura para representar um produto
 struct produto {
     int id;            // Identificador único
-    char nome[50];     // Nome do produto
+    string nome;     // Nome do produto
     int quantidade;    // Quantidade em estoque
     float preco;       // Preço unitário
     char status;       // Status ('A' para ativo, 'D' para eliminado)
